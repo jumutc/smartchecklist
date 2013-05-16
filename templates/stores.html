@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="stores-page" data-role="dialog" data-theme="e">
+    <div data-role="header">
+        <h1>Please select your store</h1>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            {% csrf_token %}
+            <ul data-role="listview">
+                {% for store in stores %}
+                    <li><a href="offers.html?store_id={{ store.id }}" data-ajax="false"><img src="{{ STATIC_URL }}images/stores/{{ store.name }}.gif"/>{{ store.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <br>
+            <a id="cancel-btn" href="index.html" data-role="button" data-direction="reverse" data-theme="a">Cancel</a>
+        </div>
+    </div>
+
+    <!-- /content -->
+    <br>
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

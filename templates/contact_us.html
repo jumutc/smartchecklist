@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="contact-us-page" data-role="dialog" data-theme="e">
+    {% if message %}
+        <script type="text/javascript">
+            alert('{{ message }}');
+            $.mobile.changePage("index.html", {reloadPage: true});
+        </script>
+    {% endif %}
+
+    <div data-role="content">
+        <form method="post">
+            {% csrf_token %}
+            <div data-role="fieldcontain">
+                <label><strong>Please enter your message...</strong></label>
+                <input placeholder="E-mail" type="text" name="email" id="email" style="width:97%;"/>
+                <br><textarea placeholder="Feel free to leave your comments or ask any questions!"
+                              name="message" id="message" style="width:97%; height:100px;"></textarea>
+                <input type="submit" data-theme="a" value="Send"/>
+                <a href="index.html" data-role="button" data-direction="reverse">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <!-- /content -->
+    <br>
+
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

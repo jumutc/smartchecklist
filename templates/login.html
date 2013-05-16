@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+{% load url from future %}
+
+<div id="login-page" data-role="dialog" data-theme="e">
+
+    {% if form.errors %}
+        <div data-role="header" id="login-errors">
+            <p style="text-align: center;">Incorrect username/password. Please try again!</p>
+        </div>
+    {% endif %}
+
+    <div data-role="content">
+
+        <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            {% csrf_token %}
+            <div data-role="fieldcontain">
+                <label><strong>Please enter your credentials...</strong></label>
+                <input placeholder="Username" type="text" name="username" id="username" style="width:97%;"/>
+                <input placeholder="Password" type="password" name="password" id="password" style="width:97%;"/>
+                <input type="submit" data-theme="a" value="Login"/>
+                <a id="cancel-btn" href="index.html" data-role="button" data-direction="reverse">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- /content -->
+    <br>
+
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

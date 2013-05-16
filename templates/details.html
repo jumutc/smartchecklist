@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="details-page" data-role="dialog" data-theme="e">
+    {% if checklist_id %}
+        <script type="text/javascript">
+            $.mobile.changePage("checklist.html?id={{ checklist_id }}", {reloadPage: false});
+        </script>
+    {% endif %}
+
+    <div data-role="header">
+        <h1>Please enter details</h1>
+    </div>
+    <div data-role="content">
+        <form method="post">
+            <div data-role="fieldcontain">
+                <div style="display: none;">
+                    <input type="text" name="id" value="{{ id }}">
+                </div>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" data-theme="a" value="Save"/>
+                <a href="#" data-role="button" data-rel="back">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- /content -->
+    <br>
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

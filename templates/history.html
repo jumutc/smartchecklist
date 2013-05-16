@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Smartest Checklist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/checklist.min.css?{{ BUILD_ID }}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tinysort.min.js?{{ BUILD_ID }}"></script>
+    <script src="{{ STATIC_URL }}js/checklist.main.min.js?{{ BUILD_ID }}"></script>
+    <script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+</head>
+<body>
+
+<div id="history-page" data-role="page" data-theme="e" class="main-background-b">
+    {% load utils %}
+    {% csrf_token %}
+
+    <div data-role="header">
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-left custom-icon">
+            <a id="back" href="my_desk.html" data-role="button" data-rel="back" data-icon="custom" data-theme="e">Back</a>
+        </fieldset>
+        <h1></h1>
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right custom-icon">
+            <a id="logout" href="logout.html" data-role="button" data-icon="custom" data-theme="e">Logout</a>
+        </fieldset>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" id="my-desk-content">
+        <ul id="history-items" name="history-items" data-role="listview" data-filter-placeholder="Search in My History..." data-filter="true" data-theme="e">
+            {% for checklist in checklists %}
+                <li>
+                    <a href="checklist.html?id={{ checklist.id }}" data-transition="flip">
+                        Created @{{ checklist.creation_time }}
+                        {% if checklist.name %}
+                            &nbsp;&nbsp;Name: {{ checklist.name }}
+                        {% endif %}
+                        {% if checklist.description %}
+                            &nbsp;&nbsp;Description: {{ checklist.description }}
+                        {% endif %}
+                        | Total: {{ checklist.total|currency:'€' }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <br><a id="refresh" href="history.html" data-role="button" data-ajax="false" data-theme="a">Refresh</a>
+    </div>
+    <!-- /content -->
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+<script type="text/javascript">
+    bindPersonalPage('history.html');
+</script>
+
+</body>
+</html>

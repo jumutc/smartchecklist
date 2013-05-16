@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+{% load url from future %}
+
+<div id="join-now-page" data-role="dialog" data-theme="e">
+
+    {% if form.errors %}
+        <div data-role="header">
+            <p style="text-align: center;">Please fill-in and/or correct your information.</p>
+            {% for id, error in form.errors.items %}
+                <div error-id='{{ id }}' style="display:none;text-align: center;">{{ error.as_text }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if message %}
+        <script type="text/javascript">
+            alert('{{ message }}');
+            $.mobile.changePage("index.html", {reloadPage: true});
+        </script>
+    {% endif %}
+
+    <div data-role="content">
+        <form method="post">
+            {% csrf_token %}
+            <div data-role="fieldcontain">
+                <label><strong>Please enter the following information...</strong></label>
+                <input placeholder="Username*" type="text" name="username" id="username" style="width:97%;"/>
+                <input placeholder="Password*" type="password" name="password1" id="password1" style="width:97%;"/>
+                <input placeholder="Password confirmation*" type="password" name="password2" id="password2" style="width:97%;"/>
+                <input placeholder="E-mail*" type="text" name="email" id="email" style="width:97%;"/>
+                <input placeholder="First Name" type="text" name="first_name" id="first_name" style="width:97%;"/>
+                <input placeholder="Last Name" type="text" name="last_name" id="last_name" style="width:97%;"/>
+                <input type="submit" data-theme="a" value="Register"/>
+                <a href="index.html" data-role="button" data-direction="reverse">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- /content -->
+    <br>
+
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

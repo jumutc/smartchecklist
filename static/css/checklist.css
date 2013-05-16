@@ -1,0 +1,103 @@
+.item-removed {
+    text-decoration: line-through !important;
+    color: #949494 !important;
+}
+
+.item-selected {
+    text-decoration: underline !important;
+    color: blue !important;
+}
+
+.item-2-large {
+    font-size: large !important;
+}
+
+.item-3-large {
+    font-size: x-large !important;
+}
+
+.item-4-large {
+    font-size: xx-large !important;
+}
+
+.main-background {
+    background: url(/static/images/bulb_large.png) no-repeat top left !important;
+}
+
+.main-background-b {
+    background: url(/static/images/bulb_large.png) no-repeat bottom right !important;
+}
+
+.containing-element .ui-slider-switch {
+    width: 7em !important;
+}
+
+.ad-items {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.ad-image {
+    height: 25px;
+    width: 26px;
+    top: .5em !important;
+}
+
+/*icons*/
+.custom-icon .ui-btn .ui-icon {
+    width: 20px!important;
+    height: 20px!important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+#my-desk .ui-icon {
+    background: url(../images/icons/162-receipt.png) 50% 50% no-repeat;
+}
+
+#stores .ui-icon {
+    background: url(../images/icons/80-shopping-cart.png) 50% 50% no-repeat;
+}
+
+#add-more-offers .ui-icon {
+    background: url(../images/icons/80-shopping-cart.png) 50% 50% no-repeat;
+}
+
+#login .ui-icon {
+    background: url(../images/icons/30-key.png) 50% 50% no-repeat;
+}
+
+#logout .ui-icon {
+    background: url(../images/icons/63-runner.png) 50% 50% no-repeat;
+}
+
+#contact-us .ui-icon {
+    background: url(../images/icons/18-envelope.png) 50% 50% no-repeat;
+}
+
+#add-more-items .ui-icon {
+    background: url(../images/icons/84-lightbulb.png) 50% 50% no-repeat;
+}
+
+#send-checklist .ui-icon {
+    background: url(../images/icons/193-location-arrow.png) 50% 50% no-repeat;
+}
+
+#back .ui-icon {
+    background: url(../images/icons/84-lightbulb.png) 50% 50% no-repeat;
+}
+
+#history .ui-icon {
+    background: url(../images/icons/33-cabinet.png) 50% 50% no-repeat;
+}
+
+#stats .ui-icon {
+    background: url(../images/icons/17-bar-chart.png) 50% 50% no-repeat;
+}
+#templates .ui-icon {
+    background: url(../images/icons/191-collection.png) 50% 50% no-repeat;
+}
+

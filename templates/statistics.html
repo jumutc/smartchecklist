@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Smartest Checklist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/checklist.min.css?{{ BUILD_ID }}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.flot.min.js?{{ BUILD_ID }}"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tinysort.min.js?{{ BUILD_ID }}"></script>
+    <script src="{{ STATIC_URL }}js/jquery.flot.selection.min.js?{{ BUILD_ID }}"></script>
+    <script src="{{ STATIC_URL }}js/statistics.main.min.js?{{ BUILD_ID }}"></script>
+    <script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+</head>
+<body>
+
+<div id="statistics-page" data-role="page" data-theme="e" class="main-background-b">
+    {% csrf_token %}
+
+    <div data-role="header">
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-left custom-icon">
+            <a id="back" data-role="button" data-rel="back" data-icon="custom" data-theme="e">Back</a>
+        </fieldset>
+        <h1></h1>
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right custom-icon">
+            <a id="logout" href="logout.html" data-role="button" data-icon="custom" data-theme="e">Logout</a>
+        </fieldset>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" id="statistics-content">
+        <div data-role="collapsible" data-collapsed="false">
+            <h3>Weekly expenses for assigned checklists</h3>
+            <div id="stats-placeholder" style="height:300px;width:98%;"></div>
+            <div id="stats-overview" style="height:50px;width:98%;"></div>
+        </div>
+    </div>
+    <!-- /content -->
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+<script type="text/javascript">
+    localStorage.stats_data = '{{ weekly_data|escapejs }}';
+    bindStatistics();
+</script>
+
+</body>
+</html>

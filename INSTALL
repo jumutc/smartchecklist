@@ -1,0 +1,44 @@
+STEP by STEP guid HOW-TO install smartchecklist project to any VPS machine (assuming Apache HTTPD is installed)
+
+1) Install Python [2.6 or higher]
+2) Install Django [1.3.1 or higher] with additional packages (for DB: psycopg2 [2.4.2], other: PyYAML [3.09])
+3) Install NumPy [1.6.1 or higher]
+4) Install NLTK [2.0.1 or higher]
+5) Download from NLTK: maxent_treebank_pos_tagger, wordnet 
+6) Configure path to NLTK corpora and tagger in settings.py
+7) Download HUNPOS tagger binary and put ir to /usr/bin
+8) Download HUNPOS english.model and put it to installation directory ~/hunpos  
+9) Configure path to HUNPOS english.model in ~/SmartChecklist/taggers.py
+10) Install mod_wsgi module for Apache HTTPD server
+11) Download any backboned django.wsgi script and put it to installation directory ~/apache  
+12) Configure paths in django.sgi script for smartchecklist project installation directory
+13) Configure your settings.py properly to correctly connect to your PostgresDB 
+14) Finally configure httpd.conf as follows and restart HTTPD server:
+--------------------------------------------------------------
+LoadModule wsgi_module modules/mod_wsgi.so
+WSGIPythonPath {path_to_project}
+
+<VirtualHost *:80>    
+    ServerName	{your_server}
+    ServerAlias	{your_alias}
+
+    AliasMatch ^/([^/]*\.css) {path_to_project}/static/$1
+    AliasMatch ^/([^/]*\.js) {path_to_project}/static/$1
+    AliasMatch ^/([^/]*\.gif) {path_to_project}/static/$1
+    AliasMatch ^/([^/]*\.png) {path_to_project}/static/$1
+
+    Alias /static/ {path_to_project}/static/
+
+    <Directory {path_to_project}/static>
+    Order deny,allow
+    Allow from all
+    </Directory>
+
+    WSGIScriptAlias / {path_to_project}/apache/django.wsgi
+
+    <Directory {path_to_project}/apache>
+    Order allow,deny
+    Allow from all
+    </Directory>
+</VirtualHost>
+--------------------------------------------------------------

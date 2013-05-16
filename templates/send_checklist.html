@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="send-checklist-page" data-role="dialog" data-theme="e">
+    {% csrf_token %}
+
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <label><strong>Please enter username or e-mail address...</strong></label>
+            <br><input placeholder="Username or E-mail" type="text" name="recipient" id="recipient" style="width:97%;"/>
+            <a href="#" id="send_in_person" data-role="button" class="ui-disabled" data-theme="a">Send in Person</a>
+            <a href="checklist.html" id="send_by_system" data-role="button" data-theme="a">Send by System</a>
+            <a href="checklist.html" data-role="button">Cancel</a>
+        </div>
+    </div>
+    <!-- /content -->
+    <br>
+
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+    <div id="checklistToSend" style="display: none"><ul></ul></div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>

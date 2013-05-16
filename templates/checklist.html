@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="checklist-page" data-role="page" data-theme="e" class="main-background-b">
+    {% load utils %}
+    {% csrf_token %}
+
+    <div data-role="header">
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-left custom-icon">
+            <a id="back" data-role="button" data-rel="back" data-icon="custom" data-theme="e">Back</a>
+        </fieldset>
+        <h1></h1>
+        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right custom-icon">
+            {% if user.is_authenticated %}
+                <a id="logout" href="logout.html" data-role="button" data-icon="custom" data-theme="e">Logout</a>
+            {% else %}
+                <a id="login" href="login.html" data-role="button" data-rel="dialog" data-icon="custom" data-theme="e">Login</a>
+            {% endif %}
+            <a href="send_checklist.html" id="send-checklist" data-role="button" data-icon="custom" data-rel="dialog" data-theme="e">Send</a>
+        </fieldset>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" id="checklist-content">
+        <ul id="checklist-items" name="checklist-items" data-role="listview" data-filter-placeholder="Search checklist items..."
+            data-filter="true" data-theme="e" data-split-icon="gear" data-split-theme="a">
+            {% for key, items in checklist.items %}
+                {% if key == 'N/A' %}
+                    {% for item in items %}
+                        {% if item.store  %}
+                            <li desk-item="{{ item.name }}">
+                                <a><img src="{{ MEDIA_URL }}promoted_items/{{ item.id }}.jpg" />
+                                <h3>{{ item.name }}</h3>
+                                <p>{{ item.description }} | due {{ item.expiration_time }} in {{ item.store.name }}
+                                    {% if item.price %} | {{ item.price|currency:'€' }} {% endif %}</p></a>
+                                <a href="#" data-rel="dialog" class="ui-disabled">Enter details</a>
+                            </li>
+                        {% else %}
+                            <li desk-item="{{ item.name }}" class="item-2-large">
+                                <a>{{ item.name }} {% if item.price %} | {{ item.price|currency:'€' }} {% endif %}</a>
+                                <a href="details.html?id={{ item.id }}" data-rel="dialog">Enter details</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% if items|length > 4 %}
+                        <li desk-item="{{ key }}" class="item-4-large">
+                    {% else %}
+                        <li desk-item="{{ key }}" class="item-{{ items|length }}-large">
+                    {% endif %}
+                        {{ key }}
+                        <ul>
+                            {% for item in items %}
+                                {% if item.store %}
+                                    <li desk-item="{{ item.name }}" parent-desk-item="{{ key }}">
+                                        <a><img src="{{ MEDIA_URL }}promoted_items/{{ item.id }}.jpg" />
+                                        <h3>{{ item.name }}</h3>
+                                        <p>{{ item.description }} | due {{ item.expiration_time }} in {{ item.store.name }}
+                                            {% if item.price %} | {{ item.price|currency:'€' }} {% endif %}</p></a>
+                                        <a href="#" data-rel="dialog" class="ui-disabled">Enter details</a>
+                                    </li>
+                                {% else %}
+                                    <li desk-item="{{ item.name }}" parent-desk-item="{{ key }}" class="item-2-large">
+                                        <a>{{ item.name }} {% if item.price %} | {{ item.price|currency:'€' }}€ {% endif %}</a>
+                                        <a href="details.html?id={{ item.id }}" data-rel="dialog">Enter details</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            <a data-rel="back" data-role="button" data-theme="a">Back</a>
+                        </ul>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <br>
+        {% if checklist.items|length == 0 %}
+            <a id="select-all" href="checklist.html" data-role="button" data-theme="a">Select All</a>
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a custom-icon"><a id="add-more-items" href="index.html" data-role="button" data-icon="custom">Add Items</a></div>
+                <div class="ui-block-b custom-icon"><a id="add-more-offers" href="stores.html" data-role="button" data-icon="custom">Add Offers</a></div>
+            </fieldset>
+        {% else %}
+            <a id="checklist-done" data-role="button" data-theme="a">Done</a>
+        {% endif %}
+    </div>
+    <!-- /content -->
+    <div id="footer" class="footer-docs" style="text-align:center;">
+        <img src="{{ STATIC_URL }}images/tsc.gif"/>
+
+        <p>&copy; 2012 The Smartest Checklist Project</p>
+    </div>
+
+</div>
+<!-- /page -->
+
+</body>
+</html>
